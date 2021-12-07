@@ -38,10 +38,7 @@ def main(filename):
 
 # function for calculating needed fuel
 def calc_sum(value):
-    result = 0
-    for i in range(1, value+1):
-        result += i
-    return result
+    return (value*(value+1))//2
 
 
 if __name__ == "__main__":
