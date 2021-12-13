@@ -18,8 +18,8 @@ def main(filename):
 
     queue = [["start", set(["start"]), False]]
 
-    while queue.count > 0:
-        position, visited, twice = queue.pop(0)
+    while len(queue) > 0:
+        position, visited, twice = queue.pop()
         if position == "end":
             path += 1
             continue
