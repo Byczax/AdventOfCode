@@ -6,40 +6,43 @@ def main(filename):
     matrix = []
     with open(filename, 'r') as file:
         lines = file.readlines()
-        lines = [line.replace("\n", "") for line in lines] # remove newlines (Windows :/ )
+        # remove newlines from end of every line
+        lines = [line.replace("\n", "") for line in lines]
         for line in lines:
             array = []
             for element in line:
                 array.append(int(element))
             matrix.append(array)
-            
+
     # get result for loaded matrix
     print("Part I:  ", end="")
     find_shortest_path(matrix)
-    
+
     # --------- II Part, bigger map --------------
     new_line = []
     new_matrix = []
     # expand horizontally
     for line in matrix:
         for element in line:
-            new_line.append(element) # add old values
+            new_line.append(element)  # add old values
         for inc in range(4):
-            expansion = [(element+inc) % 9+1 for element in line] # create in new variable
-            for element in expansion: # and iterate every element
-                new_line.append(element) # to remove ussles array
+            # create in new variable
+            expansion = [(element+inc) % 9+1 for element in line]
+            for element in expansion:  # and iterate every element
+                new_line.append(element)  # to remove ussles array
         new_matrix.append(new_line)
         new_line = []
-    
-    matrix = new_matrix # save expanded matrix
-    new_matrix = [] # prepare for vertical expansion
+
+    matrix = new_matrix  # save expanded matrix
+    new_matrix = []  # prepare for vertical expansion
     # expand vertically
     for line in matrix:
-        new_matrix.append(line) # add old values
+        new_matrix.append(line)  # add old values
     for inc in range(4):
         for line in matrix:
-            new_matrix.append([(element+inc) % 9+1 for element in line]) # add icemented line
-    
+            # add icemented line
+            new_matrix.append([(element+inc) % 9+1 for element in line])
+
     # get result for expanded matrix
     print("Part II: ", end="")
     find_shortest_path(new_matrix)

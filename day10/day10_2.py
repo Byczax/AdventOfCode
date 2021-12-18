@@ -8,7 +8,7 @@ def main(filename):
         cases = {"(": ")", "[": "]", "{": "}", "<": ">"}
         points = []
         for line in lines:
-            line = line.replace("\n", "")  # shit, windows
+            line = line.replace("\n", "")
             stack = []
             error = False
             for character in line:
