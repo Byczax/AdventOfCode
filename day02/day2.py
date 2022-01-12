@@ -4,12 +4,24 @@ import sys
 def main(filename):
     with open(filename, 'r') as file:
         lines = file.readlines()
-        position = count_position(lines)
-        print(position["depth"] * position["horizontal"])
+        print(count_position(lines))
+        print(count_position_2(lines))
 
 
 # count how many times next value is higher than previous
 def count_position(data):
+    coordinates = {}
+    for line in data:
+        position, value = line.split(" ")
+        if position not in coordinates:
+            coordinates[position] = 0
+        coordinates[position] += int(value)
+    horizontal = coordinates["forward"]
+    depth = coordinates["down"] - coordinates["up"]
+    return horizontal * depth
+
+
+def count_position_2(data):
     params = {
         "depth": 0,
         "horizontal": 0,
@@ -26,7 +38,8 @@ def count_position(data):
             params["aim"] += value
         else:
             params["aim"] -= value
-    return params
+
+    return params["depth"] * params["horizontal"]
 
 
 if __name__ == "__main__":
